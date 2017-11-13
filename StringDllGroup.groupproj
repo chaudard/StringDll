@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{46BE87FB-7960-43C1-A4C5-D5E8F8B533C9}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="dll\dllWithString.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="client\dllWithStringClient.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="dllWithString">
+			<MSBuild Projects="dll\dllWithString.dproj"/>
+		</Target>
+		<Target Name="dllWithString:Clean">
+			<MSBuild Targets="Clean" Projects="dll\dllWithString.dproj"/>
+		</Target>
+		<Target Name="dllWithString:Make">
+			<MSBuild Targets="Make" Projects="dll\dllWithString.dproj"/>
+		</Target>
+		<Target Name="dllWithStringClient">
+			<MSBuild Projects="client\dllWithStringClient.dproj"/>
+		</Target>
+		<Target Name="dllWithStringClient:Clean">
+			<MSBuild Targets="Clean" Projects="client\dllWithStringClient.dproj"/>
+		</Target>
+		<Target Name="dllWithStringClient:Make">
+			<MSBuild Targets="Make" Projects="client\dllWithStringClient.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="dllWithString;dllWithStringClient"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="dllWithString:Clean;dllWithStringClient:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="dllWithString:Make;dllWithStringClient:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>
